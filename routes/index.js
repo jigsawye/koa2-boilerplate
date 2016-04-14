@@ -1,13 +1,8 @@
 import Router from 'koa-router';
+import demo from './demo';
 
-const router = Router();
+const router = new Router({ prefix: '/api' });
 
-router.get('title', async ctx => {
-  ctx.body = { title: 'hello koa 2!' };
-});
+router.use('/', demo.routes());
 
-router.get('query/:search', async ctx => {
-  ctx.body = ctx.params;
-});
-
-export default router;
+export default router
