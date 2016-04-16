@@ -1,13 +1,21 @@
 import Router from 'koa-router';
+import Demo from '../entities/demo';
 
 const router = Router();
 
-router.get('title', async ctx => {
-  ctx.body = { title: 'hello koa 2!' };
+router.get('demo', async ctx => {
+  const demos = await Demo;
+
+  ctx.body = demos;
 });
 
-router.get('query/:search', async ctx => {
-  ctx.body = ctx.params;
+router.post('demo', async ctx => {
+  const { title } = ctx.request.body;
+
+  const demo = new Demo({ title });
+  await demo.save();
+
+  ctx.body = demo;
 });
 
 export default router;
