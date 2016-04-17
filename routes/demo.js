@@ -10,6 +10,13 @@ router.get('demo', async ctx => {
 });
 
 router.post('demo', async ctx => {
+  ctx.checkBody('title').notEmpty().len(4, 20);
+
+  if (ctx.errors) {
+    ctx.body = ctx.errors;
+    return;
+  }
+
   const { title } = ctx.request.body;
 
   const demo = new Demo({ title });
