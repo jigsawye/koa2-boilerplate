@@ -1,5 +1,5 @@
 import Router from 'koa-router';
-import Demo from '../entities/demo';
+import { Demo } from '../entities';
 
 const router = Router();
 
