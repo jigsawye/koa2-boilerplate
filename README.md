@@ -7,13 +7,20 @@ A personal boilerplate for API development.
 Install Dependencies:
 
 ```sh
-  npm install
+npm install
+```
+
+Copy the `./config.example.js` to `./config.js` and update the file for your environment.
+
+```sh
+mv config.example.js config.js
+vim config.js
 ```
 
 Start the server
 
 ```sh
-  npm start
+npm start
 ```
 
 ## License
