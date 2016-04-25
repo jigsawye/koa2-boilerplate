@@ -5,11 +5,12 @@ import bodyParser from 'koa-bodyparser';
 import validator from 'koa-validate';
 import jwt from 'koa-jwt';
 
+import { JWT_SECRET_KEY } from './config';
 import router from './routes';
 
 const app = new Koa();
 
-app.use(convert(jwt({ secret: 'shared-secret' }).unless({ path: [/^\/api\/auth/] })));
+app.use(convert(jwt({ secret: JWT_SECRET_KEY }).unless({ path: [/^\/api\/auth/] })));
 app.use(convert(logger()));
 app.use(convert(validator()));
 app.use(bodyParser());
