@@ -2,7 +2,7 @@ import Router from 'koa-router';
 import jwt from 'koa-jwt';
 import { genSaltSync, hashSync, compareSync } from 'bcrypt';
 import { User } from '../entities';
-import { JWT_SECRET_KEY } from '../config';
+import config from '../config';
 
 const salt = genSaltSync();
 const router = Router();
@@ -38,7 +38,7 @@ router.post('login', async (ctx, next) => {
     return;
   }
 
-  const token = jwt.sign({ email: user[0].email}, JWT_SECRET_KEY);
+  const token = jwt.sign({ email: user[0].email}, config.JWT_SECRET_KEY);
   ctx.body = { token };
 });
 
