@@ -6,7 +6,7 @@ import { User } from '../entities';
 const salt = genSaltSync();
 const router = Router();
 
-router.post('signup', async ctx => {
+router.use(async (ctx, next) => {
   ctx.checkBody('email').notEmpty().isEmail();
   ctx.checkBody('password').notEmpty().len(6);
 
@@ -15,6 +15,10 @@ router.post('signup', async ctx => {
     return;
   }
 
+  await next();
+});
+
+router.post('signup', async ctx => {
   let { email, password } = ctx.request.body;
   password = hashSync(password, salt);
 
@@ -24,15 +28,7 @@ router.post('signup', async ctx => {
   ctx.body = { email };
 });
 
-router.post('login', async ctx => {
-  ctx.checkBody('email').notEmpty().isEmail();
-  ctx.checkBody('password').notEmpty();
-
-  if (ctx.errors) {
-    ctx.body = ctx.errors;
-    return;
-  }
-
+router.post('login', async (ctx, next) => {
   const { email, password } = ctx.request.body;
   const user = await User.filter({ email });
 
@@ -41,8 +37,7 @@ router.post('login', async ctx => {
     return;
   }
 
-  const token = jwt.sign({ email: user.email}, 'shared-secret');
-
+  const token = jwt.sign({ email: user[0].email}, 'shared-secret');
   ctx.body = { token };
 });
 
