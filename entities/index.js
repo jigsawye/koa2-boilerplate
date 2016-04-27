@@ -1,6 +1,6 @@
 import Thinky from 'thinky';
 
-const thinky = Thinky();
+const thinky = new Thinky();
 const { type } = thinky;
 
 export const Demo = thinky.createModel('demos', {
