@@ -1,7 +1,7 @@
 import Router from 'koa-router';
 import { Demo } from '../entities';
 
-const router = Router();
+const router = new Router();
 
 router.get('demo', async ctx => {
   const demos = await Demo;

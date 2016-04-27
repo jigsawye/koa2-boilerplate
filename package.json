@@ -41,6 +41,10 @@
     "thinky": "^2.2.8"
   },
   "devDependencies": {
+    "babel-eslint": "^6.0.4",
+    "eslint": "^2.8.0",
+    "eslint-config-airbnb-base": "^1.0.4",
+    "eslint-plugin-import": "^1.6.0",
     "nodemon": "^1.9.1"
   }
 }

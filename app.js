@@ -14,7 +14,7 @@ app.use(convert(jwt({ secret: config.JWT_SECRET_KEY }).unless({ path: [/^\/api\/
 app.use(convert(logger()));
 app.use(convert(validator()));
 app.use(bodyParser());
-app.use(router.routes())
+app.use(router.routes());
 
 app.listen(3000, () => console.log('Listening on 3000.'));
 
